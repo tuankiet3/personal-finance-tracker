@@ -1,0 +1,70 @@
+<div class="app-layout">
+  {{> sidebar}}
+  <div class="main-content">
+    {{> topbar}}
+    <div class="page-content">
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-bullseye"></i> Ngân sách</h3>
+          <button class="btn btn-primary btn-sm" onclick="openBudgetModal()">
+            <i class="fas fa-plus"></i> Tạo ngân sách
+          </button>
+        </div>
+        <div class="card-body padded" id="budgetsList">
+          <div class="loading-spinner"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Budget Modal -->
+<div class="modal-overlay" id="budgetModal" style="display:none">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="budgetModalTitle">Tạo ngân sách</h2>
+      <button class="modal-close" onclick="closeBudgetModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <form id="budgetForm" onsubmit="saveBudget(event)">
+        <input type="hidden" id="budgetId">
+        <div class="form-group">
+          <label class="form-label">Danh mục</label>
+          <select class="form-input" id="budgetCategory" required>
+            <option value="">Chọn danh mục chi tiêu</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Hạn mức (VNĐ)</label>
+            <input type="number" class="form-input" id="budgetAmount" placeholder="5,000,000" min="0" step="100000" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kỳ</label>
+            <select class="form-input" id="budgetPeriod" required>
+              <option value="MONTHLY">Hàng tháng</option>
+              <option value="WEEKLY">Hàng tuần</option>
+              <option value="YEARLY">Hàng năm</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Từ ngày</label>
+            <input type="date" class="form-input" id="budgetStartDate" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Đến ngày</label>
+            <input type="date" class="form-input" id="budgetEndDate" required>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeBudgetModal()">Hủy</button>
+      <button class="btn btn-primary" onclick="document.getElementById('budgetForm').requestSubmit()">
+        <i class="fas fa-save"></i> Lưu
+      </button>
+    </div>
+  </div>
+</div>

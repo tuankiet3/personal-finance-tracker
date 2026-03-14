@@ -1,0 +1,50 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <i class="fas fa-wallet"></i>
+      <h1>FinTracker</h1>
+      <p>Quản lý chi tiêu thông minh</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Đăng nhập</button>
+      <button class="auth-tab" id="tabRegister" onclick="switchTab('register')">Đăng ký</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" id="loginEmail" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mật khẩu</label>
+        <input type="password" class="form-input" id="loginPassword" placeholder="Nhập mật khẩu" required>
+      </div>
+      <div id="loginError" class="form-error" style="display:none; margin-bottom:12px"></div>
+      <button type="submit" class="btn btn-primary btn-block" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i> Đăng nhập
+      </button>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" style="display:none" onsubmit="handleRegister(event)">
+      <div class="form-group">
+        <label class="form-label">Họ tên</label>
+        <input type="text" class="form-input" id="regName" placeholder="Nguyễn Văn A" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" id="regEmail" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mật khẩu</label>
+        <input type="password" class="form-input" id="regPassword" placeholder="Tối thiểu 6 ký tự" minlength="6" required>
+      </div>
+      <div id="registerError" class="form-error" style="display:none; margin-bottom:12px"></div>
+      <button type="submit" class="btn btn-primary btn-block" id="registerBtn">
+        <i class="fas fa-user-plus"></i> Tạo tài khoản
+      </button>
+    </form>
+  </div>
+</div>

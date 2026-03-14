@@ -1,0 +1,95 @@
+<div class="app-layout">
+  {{> sidebar}}
+  <div class="main-content">
+    {{> topbar}}
+    <div class="page-content">
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card income">
+          <div class="stat-card-header">
+            <span>Thu nhập</span>
+            <div class="stat-icon"><i class="fas fa-arrow-down"></i></div>
+          </div>
+          <div class="stat-value" id="totalIncome">0 ₫</div>
+          <div class="stat-label">Tháng này</div>
+        </div>
+        <div class="stat-card expense">
+          <div class="stat-card-header">
+            <span>Chi tiêu</span>
+            <div class="stat-icon"><i class="fas fa-arrow-up"></i></div>
+          </div>
+          <div class="stat-value" id="totalExpense">0 ₫</div>
+          <div class="stat-label">Tháng này</div>
+        </div>
+        <div class="stat-card balance">
+          <div class="stat-card-header">
+            <span>Số dư</span>
+            <div class="stat-icon"><i class="fas fa-wallet"></i></div>
+          </div>
+          <div class="stat-value" id="totalBalance">0 ₫</div>
+          <div class="stat-label">Tháng này</div>
+        </div>
+        <div class="stat-card savings">
+          <div class="stat-card-header">
+            <span>Tỉ lệ tiết kiệm</span>
+            <div class="stat-icon"><i class="fas fa-piggy-bank"></i></div>
+          </div>
+          <div class="stat-value" id="savingsRate">0%</div>
+          <div class="stat-label">Tháng này</div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3><i class="fas fa-chart-line"></i> Xu hướng thu chi</h3>
+          <div class="chart-container">
+            <canvas id="trendChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3><i class="fas fa-chart-pie"></i> Chi tiêu theo danh mục</h3>
+          <div class="chart-container">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Budget Overview -->
+      <div class="card">
+        <div class="card-header">
+          <h3><i class="fas fa-bullseye"></i> Tình trạng ngân sách</h3>
+        </div>
+        <div class="card-body padded" id="budgetOverview">
+          <div class="empty-state">
+            <i class="fas fa-bullseye"></i>
+            <p>Chưa có ngân sách nào</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Transactions -->
+      <div class="card" style="margin-top: 20px;">
+        <div class="card-header">
+          <h3><i class="fas fa-clock"></i> Giao dịch gần đây</h3>
+          <a href="/transactions" class="btn btn-outline btn-sm">Xem tất cả</a>
+        </div>
+        <div class="card-body">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Danh mục</th>
+                <th>Mô tả</th>
+                <th>Ngày</th>
+                <th>Số tiền</th>
+              </tr>
+            </thead>
+            <tbody id="recentTransactions">
+              <tr><td colspan="4" class="empty-state"><p>Chưa có giao dịch</p></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
