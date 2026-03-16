@@ -96,6 +96,12 @@ function setupSidebar() {
     if (href === path) link.classList.add('active');
   });
 
+  // Bottom nav active state
+  document.querySelectorAll('.bottom-nav-item').forEach(item => {
+    const href = item.getAttribute('href');
+    if (href === path) item.classList.add('active');
+  });
+
   const mobileBtn = document.getElementById('mobileMenuBtn');
   const sidebar = document.getElementById('sidebar');
   if (mobileBtn && sidebar) {

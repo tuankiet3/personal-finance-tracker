@@ -49,3 +49,107 @@
     </button>
   </div>
 </nav>
+
+<!-- Mobile Bottom Navigation -->
+<nav class="bottom-nav" id="bottomNav">
+  <a href="/dashboard" class="bottom-nav-item" data-page="dashboard">
+    <i class="fas fa-chart-pie"></i>
+    <span>Tổng quan</span>
+  </a>
+  <a href="/transactions" class="bottom-nav-item" data-page="transactions">
+    <i class="fas fa-exchange-alt"></i>
+    <span>Giao dịch</span>
+  </a>
+  <button class="bottom-nav-scan" id="bottomScanBtn" onclick="openScanner()">
+    <div class="scan-btn-inner">
+      <i class="fas fa-camera"></i>
+    </div>
+    <span>Quét Bill</span>
+  </button>
+  <a href="/categories" class="bottom-nav-item" data-page="categories">
+    <i class="fas fa-tags"></i>
+    <span>Danh mục</span>
+  </a>
+  <a href="/budgets" class="bottom-nav-item" data-page="budgets">
+    <i class="fas fa-bullseye"></i>
+    <span>Ngân sách</span>
+  </a>
+</nav>
+
+<!-- Scanner Modal -->
+<div class="scanner-overlay" id="scannerModal" style="display:none">
+  <div class="scanner-container">
+    <div class="scanner-header">
+      <h2><i class="fas fa-camera"></i> Quét hóa đơn</h2>
+      <button class="modal-close" onclick="closeScanner()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="scanner-body">
+      <!-- Camera / Image Preview -->
+      <div class="scanner-viewfinder" id="scannerViewfinder">
+        <video id="cameraStream" autoplay playsinline></video>
+        <canvas id="cameraCanvas" style="display:none"></canvas>
+        <img id="capturedImage" style="display:none" />
+        <div class="viewfinder-overlay" id="viewfinderOverlay">
+          <div class="viewfinder-frame"></div>
+          <p class="viewfinder-hint">Đặt hóa đơn vào khung hình</p>
+        </div>
+      </div>
+
+      <!-- Scanner Controls -->
+      <div class="scanner-controls" id="scannerControls">
+        <label class="btn btn-outline scanner-file-btn">
+          <i class="fas fa-image"></i> Chọn ảnh
+          <input type="file" id="scannerFileInput" accept="image/*" capture="environment" style="display:none" onchange="handleFileSelect(event)">
+        </label>
+        <button class="btn-scan-capture" id="captureBtn" onclick="captureImage()">
+          <div class="capture-ring"></div>
+        </button>
+        <button class="btn btn-outline" id="switchCameraBtn" onclick="switchCamera()">
+          <i class="fas fa-sync-alt"></i> Lật cam
+        </button>
+      </div>
+
+      <!-- Processing State -->
+      <div class="scanner-processing" id="scannerProcessing" style="display:none">
+        <div class="processing-animation">
+          <div class="scan-line"></div>
+        </div>
+        <p class="processing-text">Đang nhận diện văn bản...</p>
+        <div class="progress-bar scanner-progress">
+          <div class="progress-fill on-track" id="ocrProgress" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Results Preview -->
+      <div class="scanner-results" id="scannerResults" style="display:none">
+        <h3><i class="fas fa-magic"></i> Kết quả trích xuất</h3>
+        <div class="result-fields">
+          <div class="result-field">
+            <label class="form-label">Số tiền</label>
+            <input type="text" class="form-input" id="scanAmount" placeholder="Chưa nhận diện được">
+          </div>
+          <div class="result-field">
+            <label class="form-label">Ngày</label>
+            <input type="date" class="form-input" id="scanDate">
+          </div>
+          <div class="result-field">
+            <label class="form-label">Mô tả</label>
+            <input type="text" class="form-input" id="scanDescription" placeholder="Chưa nhận diện được">
+          </div>
+          <div class="result-field">
+            <label class="form-label">Văn bản gốc</label>
+            <textarea class="form-input scan-raw-text" id="scanRawText" rows="4" readonly></textarea>
+          </div>
+        </div>
+        <div class="scanner-result-actions">
+          <button class="btn btn-outline" onclick="resetScanner()">
+            <i class="fas fa-redo"></i> Quét lại
+          </button>
+          <button class="btn btn-primary" onclick="createTransactionFromScan()">
+            <i class="fas fa-plus"></i> Tạo giao dịch
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
